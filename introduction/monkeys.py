@@ -52,11 +52,11 @@ def find_match(sentence):
         rand_sentence = "".join(l)
         times += 1
         if times % 1000 == 0:
-            print "%s : %i" % (rand_sentence, current_score)
+            print("%s : %i" % (rand_sentence, current_score))
     return "%s : %i : %d" % (rand_sentence, current_score, times)
 
 
 
 shakespeare = "methinks it is a weasel"
 
-print find_match(shakespeare)
+print(find_match(shakespeare))
