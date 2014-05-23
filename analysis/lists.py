@@ -37,4 +37,4 @@ def test():
     print('tests pass')
 
 
-print(test())
+test()
