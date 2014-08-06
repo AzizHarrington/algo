@@ -1,11 +1,8 @@
-import cProfile
-
 #Write a boolean function that returns true if two inputted strings of equal length
 #are anagrams of eachother.
 
 
-
-
+#my solution
 def is_anagram(str1, str2):
     for a in set((str1 + str2)):
         if a not in set(str1) or a not in set(str2):
