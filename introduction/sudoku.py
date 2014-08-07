@@ -1,3 +1,6 @@
+import itertools
+
+
 puzzle = [
     [1, 5, 9, 0, 6, 0, 7, 0, 0, 0],
     [0, 0, 7, 1, 0, 0, 4, 9, 0, 0],
@@ -11,7 +14,6 @@ puzzle = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
-
 def check_row(row, puzzle):
     digits = [n for n in puzzle[row] if n]
     return len(digits) == len(set(digits))
@@ -22,7 +24,6 @@ def check_column(column, puzzle):
     return len(digits) == len(set(digits))
 
 
-import itertools
 def check_square(square, puzzle):
     if square in [0, 1, 2]:
         select_rows = puzzle[:3]
@@ -37,26 +38,26 @@ def check_square(square, puzzle):
     return len(digits) == len(set(digits))
 
 
-test_puzzle = [
-    [1, 5, 9, 0, 6, 0, 7, 0, 0, 0],
-    [0, 7, 7, 1, 0, 0, 4, 9, 0, 0],
-    [0, 8, 4, 0, 9, 0, 0, 9, 0, 0],
-    [0, 0, 5, 9, 0, 0, 0, 8, 0, 0],
-    [8, 0, 2, 0, 3, 0, 9, 0, 4, 0],
-    [0, 3, 0, 0, 0, 2, 5, 0, 0, 0],
-    [0, 0, 0, 0, 5, 0, 1, 4, 0, 0],
-    [0, 9, 6, 0, 0, 3, 8, 0, 0, 0],
-    [0, 0, 8, 0, 4, 0, 6, 3, 2, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-]
-
-
 def test():
+    test_puzzle = [
+        [1, 5, 9, 0, 6, 0, 7, 0, 0, 0],
+        [0, 7, 7, 1, 0, 0, 4, 9, 0, 0],
+        [0, 8, 4, 0, 9, 0, 0, 9, 0, 0],
+        [0, 0, 5, 9, 0, 0, 0, 8, 0, 0],
+        [8, 0, 2, 0, 3, 0, 9, 0, 4, 0],
+        [0, 3, 0, 0, 0, 2, 5, 0, 0, 0],
+        [0, 0, 0, 0, 5, 0, 1, 4, 0, 0],
+        [0, 9, 6, 0, 0, 3, 8, 0, 0, 0],
+        [0, 0, 8, 0, 4, 0, 6, 3, 2, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ]
+
     assert check_row(0, test_puzzle) == True
     assert check_row(1, test_puzzle) == False
     assert check_column(8, test_puzzle) == True
     assert check_column(7, test_puzzle) == False
     assert check_square(6, test_puzzle) == True
     assert check_square(0, test_puzzle) == False
+
     print('tests passed')
 
