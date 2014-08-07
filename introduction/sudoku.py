@@ -59,8 +59,4 @@ def test():
     assert check_square(6, test_puzzle) == True
     assert check_square(0, test_puzzle) == False
     print('tests passed')
-    return True
-
-if not test():
-    test()
 
