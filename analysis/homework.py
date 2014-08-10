@@ -43,7 +43,7 @@ def test_del():
 # find kth smallest number in random list of numbers in linear time
 def find_smallest(num_list):
     smallest = None
-    for n in num_list:
+    for n in num_list: # only iterates through list once, maintains linear time
         if not smallest or n < smallest:
             smallest = n
     return smallest
