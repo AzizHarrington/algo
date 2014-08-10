@@ -39,49 +39,53 @@ def check_square(square, puzzle):
     return len(digits) == len(set(digits))
 
 
-def solve_row(puzzle, col=0, blanks=None, times=0):
-    """simple version of solve. one row only"""
-    times += 1     
-    print(puzzle[0], col, blanks, times)
-    # when we hit 100 times, stop to look at progress
+def is_solved(puzzle):
+    for row in range(len(puzzle)):
+        if not (check_row(row, puzzle) and sum(puzzle[row]) == 45):
+            return False
+        for col in range(len(puzzle)):
+            if not (check_column(col, puzzle) and sum(puzzle[row]) == 45):
+                return False
+
+    for i in range(len(puzzle)):
+        if not check_square(i, puzzle):
+            return False
+    return True
+
+print(is_solved(puzzle))
+
+
+def solve(puzzle, times=0):
+    times += 1
+    print(puzzle[0], times)
+
     if times == 100:
+        print("reached limit")
         return
-    # if we've reached the end of row, we are done
-    if col == len(puzzle[0]):
+
+    # if is_solved(puzzle[0]):
+    #     return puzzle[0]
+    solved = True
+    if not (check_row(0, puzzle) and sum(puzzle[0]) == 45):
+        solved = False
+
+    if solved:
         return puzzle[0]
 
-    val = puzzle[0][col]
-    # check to see if current cell is invalid or blank
-    if ((not check_row(0, puzzle) and check_column(col, puzzle)) or (val < 1)):
-        # increment cell value until it passes
-        for i in range(1, 10):
-            puzzle[0][col] += 1
-            if (puzzle[0][col] < 10) and check_row(0, puzzle) and check_column(col, puzzle):
-                # check if list of successfully filled blanks has been
-                # initialized, and store current col
-                if not isinstance(blanks, list):
-                    blanks = []
-                blanks.append(col)
-                col += 1
-                # once valid value is found, increment col
-                # and call solve_row
-                return solve_row(puzzle, col, blanks, times)
-        else:
-            # no valid value for cell
-            # backtrack
-            puzzle[0][col] = 0
-            # get the position to backtrack to
-            back = blanks.pop()
-            # increment it, and recurse
-            puzzle[0][back] += 1
-            return solve_row(puzzle, back, blanks, times)
     else:
-        # cell was valid, skip to next
-        col += 1
-        return solve_row(puzzle, col, blanks, times)
+        for cell in range(0, len(puzzle[0])):
+            if (puzzle[0][cell] == 0):
+                for i in range(1, 9):
+                    puzzle[0][cell] += 1
+                    if check_row(0, puzzle) and check_column(cell, puzzle):
+                        if solve_row1(puzzle, times):
+                            return solve_row1(puzzle, times)
+                        else:
+                            puzzle[0][cell] = 0
+    return None 
 
 
-print(solve_row(puzzle))
+print(solve_row1(puzzle))
 
 
 def test():
