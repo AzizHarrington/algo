@@ -28,6 +28,7 @@ def check_square(square, puzzle):
 
 
 def check_all_squares(puzzle):
+    """applies check square to whole puzzle"""
     for s in range(9):
         if not check_square(s, puzzle):
             return False
@@ -35,6 +36,7 @@ def check_all_squares(puzzle):
 
 
 def find_next_blank(puzzle):
+    """find the next blank cell and return row, col"""
     for row in range(9):
         for col in range(9):
             if puzzle[row][col] == 0:
@@ -42,6 +44,7 @@ def find_next_blank(puzzle):
 
 
 def is_solved(puzzle):
+    """check that whole puzzle passes all check tests"""
     for row in range(len(puzzle)):
         if not (check_row(row, puzzle) and sum(puzzle[row]) == 45):
             return False
@@ -55,6 +58,23 @@ def is_solved(puzzle):
     return True
 
 
+def solve(puzzle):
+    if is_solved(puzzle):
+        return puzzle
+    else:
+        row, col = find_next_blank(puzzle)
+        for i in range(1, 10):
+            puzzle[row][col] = i
+            if check_row(row, puzzle) and check_column(col, puzzle) and check_all_squares(puzzle):
+                if solve(puzzle):
+                    return solve(puzzle)
+                else:
+                    puzzle[row][col] = 0
+        else:
+            puzzle[row][col] = 0
+    return False
+
+
 puzzle = [
     [0, 0, 8, 0, 0, 9, 0, 0, 0],
     [0, 0, 4, 1, 6, 3, 0, 0, 0],
@@ -66,35 +86,6 @@ puzzle = [
     [0, 0, 0, 7, 8, 1, 9, 0, 0],
     [0, 0, 0, 3, 0, 0, 4, 0, 0]
 ]
-
-
-def solve(puzzle, times=0):
-    times += 1
-
-    if times == 100:
-        print("reached limit")
-        return True
-
-    if is_solved(puzzle):
-        return puzzle
-
-    else:
-        row, col = find_next_blank(puzzle)
-        for i in range(1, 10):
-            puzzle[row][col] = i
-            if check_row(row, puzzle) and check_column(col, puzzle) and check_all_squares(puzzle):
-                
-                for r in puzzle:
-                    print(r)
-                print(times)
-
-                if solve(puzzle, times):
-                    return True
-                else:
-                    puzzle[row][col] = 0
-        else:
-            puzzle[row][col] = 0
-    return False
 
 print(solve(puzzle))
 
