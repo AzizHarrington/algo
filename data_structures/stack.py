@@ -58,9 +58,9 @@ def sym_checker(symbol_str):
             s.push(sym)
         elif sym in syms.values():
             if syms[s.peek()] == sym:
-                try:
+                if not s.is_empty():
                     s.pop()
-                except:
+                else:
                     return False
             else:
                 False
