@@ -16,3 +16,24 @@ class Stack:
 
     def size(self):
         return len(self.items)
+
+
+def test():
+    s = Stack()
+
+    assert s.isEmpty() == True
+    s.push(4)
+    s.push('dog')
+    assert s.peek() == 'dog'
+    s.push(True)
+    assert s.size() == 3
+    assert s.isEmpty() == False
+    s.push(8.4)
+    assert s.pop() == 8.4
+    assert s.pop() == True
+    assert s.size() == 2
+
+    print("tests pass")
+
+
+test()
