@@ -2,15 +2,6 @@ class Stack:
     def __init__(self):
         self.items = []
 
-    def __iter__(self):
-        return self
-
-    def next(self):
-        if not self.is_empty():
-            return self.pop()
-        else:
-            raise StopIteration()
-
     def is_empty(self):
         return self.items == []
 
@@ -98,7 +89,10 @@ def dec_to_bin(integer):
     while integer:
         s.push(integer%2)
         integer //= 2
-    return '0b' + ''.join(str(b) for b in s)
+    b = '0b'
+    while not s.is_empty():
+        b += str(s.pop())
+    return b
 
 
 def test_dec_to_bin():
