@@ -60,18 +60,26 @@ def is_solved(puzzle):
 
 def solve(puzzle):
     if is_solved(puzzle):
-        return puzzle
+        for r in puzzle:
+            print(r)
+        return True
     else:
+        # get the next blank cell
+        # assign 1-9 and test for validity
         row, col = find_next_blank(puzzle)
         for i in range(1, 10):
             puzzle[row][col] = i
             if check_row(row, puzzle) and check_column(col, puzzle) and check_all_squares(puzzle):
+                # if check for return
                 if solve(puzzle):
                     return solve(puzzle)
+                # if dead end, reset cell for next pass through
                 else:
                     puzzle[row][col] = 0
+        # reset
         else:
             puzzle[row][col] = 0
+    # finally return False if no valid cell val or dead end
     return False
 
 
