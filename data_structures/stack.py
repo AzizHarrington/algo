@@ -49,28 +49,36 @@ def revstring(a_str):
     return revstr
 
 
-def par_checker(symbol_str):
-    """takes string with parenthesis and returns true if balanced"""
+def sym_checker(symbol_str):
+    """takes string with returns true if symbols balanced"""
+    syms = {'(': ')', '[': ']', '{': '}'}
     s = Stack()
     for sym in symbol_str:
-        if sym == '(':
+        if sym in syms.keys():
             s.push(sym)
-        elif sym == ')':
-            try:
-                s.pop()
-            except:
-                return False
+        elif sym in syms.values():
+            if syms[s.peek()] == sym:
+                try:
+                    s.pop()
+                except:
+                    return False
+            else:
+                False
     return s.size() == 0
 
 
-def test_par_checker():
+def test_sym_checker():
     str1 = "((1 + 2) * (3 / 4) / (2 ** 2) + ( 1 + 1))"
     str2 = "(((((((True) or  False)"
+    str3 = "{ { ( [ ] [ ] ) } ( ) }"
+    str4 = "( [ ) ]"
 
-    assert par_checker(str1) == True
-    assert par_checker(str2) == False
+    assert sym_checker(str1) == True
+    assert sym_checker(str2) == False
+    assert sym_checker(str3) == True
+    assert sym_checker(str4) == False
 
-    print("par_checker tests pass")
+    print("sym_checker tests pass")
 
 
-test_par_checker()
+test_sym_checker()
