@@ -2,7 +2,7 @@ class Stack:
     def __init__(self):
         self.items = []
 
-    def isEmpty(self):
+    def is_empty(self):
         return self.items == []
 
     def push(self, item):
@@ -21,13 +21,13 @@ class Stack:
 def test():
     s = Stack()
 
-    assert s.isEmpty() == True
+    assert s.is_empty() == True
     s.push(4)
     s.push('dog')
     assert s.peek() == 'dog'
     s.push(True)
     assert s.size() == 3
-    assert s.isEmpty() == False
+    assert s.is_empty() == False
     s.push(8.4)
     assert s.pop() == 8.4
     assert s.pop() == True
