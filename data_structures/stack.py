@@ -37,3 +37,13 @@ def test():
 
 
 test()
+
+
+def revstring(a_str):
+    s = Stack()
+    for a in a_str:
+        s.push(a)
+    revstr = ''
+    while not s.is_empty():
+        revstr += s.pop()
+    return revstr
