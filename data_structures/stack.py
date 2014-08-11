@@ -18,7 +18,7 @@ class Stack:
         return len(self.items)
 
 
-def test():
+def test_stack():
     s = Stack()
 
     assert s.is_empty() == True
@@ -34,9 +34,6 @@ def test():
     assert s.size() == 2
 
     print("stack tests pass")
-
-
-test()
 
 
 def revstring(a_str):
@@ -81,27 +78,34 @@ def test_sym_checker():
     print("sym_checker tests pass")
 
 
-test_sym_checker()
 
 
-def dec_to_bin(integer):
+def convert_dec(integer, base):
+    """takes integer and returns binary"""
+    digits = '0123456789ABCDEF'
     s = Stack()
     while integer:
-        s.push(integer%2)
-        integer //= 2
-    b = '0b'
+        s.push(digits[integer%base])
+        integer //= base
+    b = ''
     while not s.is_empty():
         b += str(s.pop())
     return b
 
 
-def test_dec_to_bin():
+def test_conver_dec():
     int1 = 233
 
-    assert dec_to_bin(233) == '0b11101001'
+    assert convert_dec(233, 2) == '11101001'
+    assert convert_dec(233, 8) == '351'
+    assert convert_dec(233, 16) == 'E9'
 
     print("dec_to_bin tests pass")
 
 
-test_dec_to_bin()
+if __name__ == '__main__':
+    test_conver_dec()
 
+    test_sym_checker()
+
+    test_stack()
