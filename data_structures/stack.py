@@ -2,6 +2,15 @@ class Stack:
     def __init__(self):
         self.items = []
 
+    def __iter__(self):
+        return self
+
+    def next(self):
+        if not self.is_empty():
+            return self.pop()
+        else:
+            raise StopIteration()
+
     def is_empty(self):
         return self.items == []
 
@@ -82,3 +91,23 @@ def test_sym_checker():
 
 
 test_sym_checker()
+
+
+def dec_to_bin(integer):
+    s = Stack()
+    while integer:
+        s.push(integer%2)
+        integer //= 2
+    return '0b' + ''.join(str(b) for b in s)
+
+
+def test_dec_to_bin():
+    int1 = 233
+
+    assert dec_to_bin(233) == '0b11101001'
+
+    print("dec_to_bin tests pass")
+
+
+test_dec_to_bin()
+
