@@ -81,7 +81,7 @@ def test_sym_checker():
 
 
 def convert_dec(integer, base):
-    """takes integer and returns binary"""
+    """takes integer and returns new base number"""
     digits = '0123456789ABCDEF'
     s = Stack()
     while integer:
