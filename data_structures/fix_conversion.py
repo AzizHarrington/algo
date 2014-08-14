@@ -36,8 +36,15 @@ def test():
     pre_exp1 = "*+ABC"
     post_exp1 = "AB+C*"
 
+    in_exp2 = "((A+(B*C))+D)"
+    pre_exp2 = "++A*BCD"
+    post_exp2 = "ABC*+D+"
+
     assert converter(in_exp1, "pre") == pre_exp1
     assert converter(in_exp1, "post") == post_exp1
+
+    assert converter(in_exp2, "pre") == pre_exp2
+    assert converter(in_exp2, "post") == post_exp2
 
     print("tests pass")
 
