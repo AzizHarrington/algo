@@ -2,8 +2,18 @@ from stack import Stack
 
 
 def evaluator(exp):
-    """takes postfix expression and returns result"""
-    pass
+    """takes simple (*/+-) postfix expression and returns result"""
+    s = Stack()
+    tokens = exp.split()
+    for t in tokens:
+        if t.isdigit():
+            s.push(t)
+        elif t in "*/-+":
+            op2 = s.pop()  # second op appears first on stack
+            op1 = s.pop()  # first operand is next
+            result = eval("{}{}{}".format(op1, t, op2))
+            s.push(result)
+    return s.pop()  # return final result from stack
 
 
 def test():
