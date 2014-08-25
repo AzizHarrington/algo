@@ -14,7 +14,7 @@ class Deque:
     def remove_front(self):
         return self.items.pop()
 
-    def is_empy(self):
+    def is_empty(self):
         return self.items == []
 
     def size(self):
@@ -24,7 +24,7 @@ class Deque:
 def test():
     d = Deque()
 
-    assert d.is_empy() == True
+    assert d.is_empty() == True
 
     d.add_rear(4)
     d.add_rear('dog')
@@ -32,7 +32,7 @@ def test():
     d.add_front(True)
 
     assert d.size() == 4
-    assert d.is_empy() == False
+    assert d.is_empty() == False
 
     d.add_rear(8.4)
 
