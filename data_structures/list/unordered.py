@@ -38,22 +38,29 @@ class UnorderedList:
                 else:
                     prev.set_next(current.get_next())
                 break
-            prev = current
-            current = current.get_next()
-                
+            prev, current = current, current.get_next()         
 
 
-ul = UnorderedList()
+def test():
+    ul = UnorderedList()
 
-ul.add("bob")
-ul.add("tree")
-ul.add(2)
-ul.add(1)
+    assert ul.size() == 0
 
-print(ul.size())
+    ul.add(2)
+    ul.add(1)
+    assert ul.size() == 2
 
-ul.remove(1)
+    ul.add("bob")
+    ul.add("tree")
+    assert ul.search("tree") == True
+    assert ul.search("dog") == False 
 
-print(ul.size())
-print(ul.search(1))
+    ul.remove(1)
+    assert ul.size() == 3
 
+    print("tests pass")
+
+
+if __name__ == "__main__":
+
+    test()
