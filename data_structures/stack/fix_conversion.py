@@ -7,7 +7,7 @@ def converter(exp, fix="post"):
     open_paren, close_paren = "(", ")"
 
     if fix not in ["pre", "post"]:
-        raise ValueError("Must specify fix as either 'pre' or 'post'")
+        raise ValueError("Must specify conversion as either 'pre' or 'post'")
 
     if fix == "pre":
         tokens.reverse()

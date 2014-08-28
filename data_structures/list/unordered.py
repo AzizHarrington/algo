@@ -5,6 +5,16 @@ class UnorderedList:
     def __init__(self):
         self.head = None
 
+    def __str__(self):
+        current = self.head
+        str_rpr = '['
+        while current:
+            str_rpr += str(current.get_data())
+            if current.get_next():
+                str_rpr += ', '
+            current = current.get_next()
+        return str_rpr + ']'
+
     def is_empty(self):
         return self.head == None
 
@@ -158,6 +168,13 @@ def test():
     assert ul3.pop() == 3
     assert ul3.pop(0) == True
     assert ul3.size() == 2
+
+    l = UnorderedList()
+
+    for i in range(10):
+        l.add(i)
+
+    assert l.__str__() == '[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]'
 
     print("tests pass")
 
