@@ -38,8 +38,8 @@ class OrderedList(UnorderedList):
             current = current.get_next()
         return False
 
-    def insert(self, position, item):
-        pass
+    def insert(self, *args, **kwargs):
+        raise AttributeError("OrderedList has no attribute 'insert'")
 
 
 def test():
