@@ -29,7 +29,14 @@ class OrderedList(UnorderedList):
         self.head = temp
 
     def search(self, item):
-        pass
+        current = self.head
+        while current:
+            if current.get_data() == item:
+                return True
+            if current.get_data() > item:
+                break
+            current = current.get_next()
+        return False
 
     def insert(self, position, item):
         pass
@@ -40,18 +47,23 @@ def test():
     o = OrderedList()
 
     assert o.is_empty()
-
     o.add(1)
     o.add(2)
     o.add(5)
     o.add(3)
     o.add(4)
-
     assert o.size() == 5
-
     o.remove(1)
-
     assert o.size() == 4
+    assert o.search(2) == True
+    assert o.search(5) == True
+    assert o.search(1) == False
+
+    two = OrderedList()
+
+    assert two.search(3) == False
+    two.add(1)
+    assert two.search(1) == True
 
     print("tests pass")
 
