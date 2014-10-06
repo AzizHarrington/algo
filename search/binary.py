@@ -1,11 +1,8 @@
-import math
-
-
 def binary_search(alist, item):
     found = False
 
     while not found and len(alist) > 0:
-        mid_point = int(math.ceil(len(alist) / 2))
+        mid_point = len(alist) / 2
         if alist[mid_point] == item:
             found = True
         elif alist[mid_point] < item:
