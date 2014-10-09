@@ -20,3 +20,7 @@ print(binary_search(test_list, 6))
 print(binary_search(test_list, 1))
 print(binary_search(test_list, 45))
 print(binary_search(test_list, 15))
+
+
+def recursive_binary_search(alist, item):
+    pass
