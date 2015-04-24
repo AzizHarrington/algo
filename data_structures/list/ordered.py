@@ -1,5 +1,6 @@
-from node import Node 
-from unordered import UnorderedList
+from .node import Node
+from .unordered import UnorderedList
+
 
 class OrderedList(UnorderedList):
     def __init__(self):

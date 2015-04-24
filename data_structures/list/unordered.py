@@ -1,4 +1,4 @@
-from node import Node
+from .node import Node
 
 
 class UnorderedList:
@@ -22,6 +22,15 @@ class UnorderedList:
         temp = Node(item)
         temp.set_next(self.head)
         self.head = temp
+
+    def get(self, index):
+        # return item data at index
+        i = 0
+        current = self.head
+        while i != index:
+            i += 1
+            current = current.get_next()
+        return current.get_data()
 
     def size(self):
         count = 0
