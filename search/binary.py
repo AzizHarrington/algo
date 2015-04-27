@@ -41,7 +41,7 @@ def test():
     assert recursive_binary_search(test_list, 45)
     assert not recursive_binary_search(test_list, 15)
 
-    print("tests pass")
+    print("binary search tests pass")
 
 
 if __name__ == "__main__":

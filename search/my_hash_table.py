@@ -8,10 +8,17 @@ class HashTable:
         self.keys = [OrderedList() for x in range(self.size)]
         self.values = [OrderedList() for x in range(self.size)]
 
-    def put(self, key, val):
-        pos = self._hash(key)
-        self.keys[pos].add(key)
-        self.values[pos].add(val)
+    def __setitem__(self, key, val):
+        position = self._hash(key)
+        keys = self.keys[position]
+        vals = self.values[position]
+        if keys.index(key) == -1:
+            # if key not found, add it
+            keys.add(key)
+        else:
+            # else if key is present, remove old value
+            vals.pop(keys.index(key))
+        vals.add(val)
 
     def _hash(self, key):
         # keys must be immutable
@@ -21,7 +28,7 @@ class HashTable:
             number += (ord(char) * (index + 1))
         return number % self.size
 
-    def get(self, key):
+    def __getitem__(self, key):
         table_pos = self._hash(key)
         list_pos = self.keys[table_pos].index(key)
         return self.values[table_pos].get(list_pos)
@@ -39,6 +46,12 @@ class HashTable:
 def test():
     ht = HashTable()
     assert ht.__class__ == HashTable
+    ht['foo'] = 'bar'
+    assert ht['foo'] == 'bar'
+    ht['foo'] = 'blah'
+    assert ht['foo'] == 'blah'
+
+    print('hashtable tests passed')
 
 
 if __name__ == "__main__":
