@@ -1,12 +1,14 @@
-from data_structures.list.ordered import OrderedList
+from functools import reduce
+
+from data_structures.list.unordered import UnorderedList
 
 
 class HashTable:
 
     def __init__(self, size=11):
         self.size = size
-        self.keys = [OrderedList() for x in range(self.size)]
-        self.values = [OrderedList() for x in range(self.size)]
+        self.keys = [UnorderedList() for x in range(self.size)]
+        self.values = [UnorderedList() for x in range(self.size)]
 
     def __setitem__(self, key, val):
         position = self._hash(key)
@@ -17,7 +19,8 @@ class HashTable:
             keys.add(key)
         else:
             # else if key is present, remove old value
-            vals.pop(keys.index(key))
+            value = self._get_value(key)
+            vals.remove(value)
         vals.add(val)
 
     def _hash(self, key):
@@ -33,8 +36,16 @@ class HashTable:
         list_pos = self.keys[table_pos].index(key)
         return self.values[table_pos].get(list_pos)
 
-    def __del__(self):
-        pass
+    def __delitem__(self, key):
+        pos = self._hash(key)
+        value = self._get_value(key)  # do this before delete key!!!
+        self.keys[pos].remove(key)
+        self.values[pos].remove(value)
+
+    def _get_value(self, key):
+        pos = self._hash(key)
+        key_pos = self.keys[pos].index(key)
+        return self.values[pos].get(key_pos)
 
     def len(self):
         return reduce(lambda a, b: a + b.size(), self.keys, 0)
