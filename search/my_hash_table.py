@@ -37,7 +37,7 @@ class HashTable:
         pass
 
     def len(self):
-        pass
+        return reduce(lambda a, b: a + b.size(), self.keys, 0)
 
     def __contains__(self):
         pass
@@ -50,6 +50,11 @@ def test():
     assert ht['foo'] == 'bar'
     ht['foo'] = 'blah'
     assert ht['foo'] == 'blah'
+    ht[3] = 'three'
+    ht['tree'] = 'apple'
+    assert ht.len() == 3
+    del ht[3]
+    assert ht.len() == 2
 
     print('hashtable tests passed')
 
