@@ -23,18 +23,8 @@ class HashTable:
             vals.remove(value)
         vals.add(val)
 
-    def _hash(self, key):
-        # keys must be immutable
-        assert isinstance(key, (str, int, tuple, float))
-        number = 0
-        for index, char in enumerate(str(key)):
-            number += (ord(char) * (index + 1))
-        return number % self.size
-
     def __getitem__(self, key):
-        table_pos = self._hash(key)
-        list_pos = self.keys[table_pos].index(key)
-        return self.values[table_pos].get(list_pos)
+        return self._get_value(key)
 
     def __delitem__(self, key):
         pos = self._hash(key)
@@ -42,16 +32,33 @@ class HashTable:
         self.keys[pos].remove(key)
         self.values[pos].remove(value)
 
-    def _get_value(self, key):
+    def __contains__(self, key):
         pos = self._hash(key)
-        key_pos = self.keys[pos].index(key)
-        return self.values[pos].get(key_pos)
+        return self.keys[pos].index(key) != -1
 
-    def len(self):
+    def __len__(self):
         return reduce(lambda a, b: a + b.size(), self.keys, 0)
 
-    def __contains__(self):
-        pass
+    def _get_key_index(self, key):
+        pos = self._hash(key)
+        try:
+            key_pos = self.keys[pos].index(key)
+        except AttributeError:
+            raise KeyError("%s" % key)
+        return key_pos
+
+    def _get_value(self, key):
+        pos = self._hash(key)
+        key_pos = self._get_key_index(key)
+        return self.values[pos].get(key_pos)
+
+    def _hash(self, key):
+        # keys must be immutable
+        assert isinstance(key, (str, int, tuple, float))
+        number = 0
+        for index, char in enumerate(str(key)):
+            number += (ord(char) * (index + 1))
+        return number % self.size
 
 
 def test():
@@ -63,9 +70,10 @@ def test():
     assert ht['foo'] == 'blah'
     ht[3] = 'three'
     ht['tree'] = 'apple'
-    assert ht.len() == 3
+    assert 'tree' in ht
+    assert len(ht) == 3
     del ht[3]
-    assert ht.len() == 2
+    assert len(ht) == 2
 
     print('hashtable tests passed')
 
