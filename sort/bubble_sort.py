@@ -18,8 +18,7 @@ def recursive_bubble_sort(a_list, is_sorted=False):
         other = a_list[pos+1]
         if item > other:
             is_sorted = False
-            a_list[pos] = other
-            a_list[pos+1] = item
+            a_list[pos], a_list[pos+1] = other, item
 
     return recursive_bubble_sort(a_list, is_sorted)
 
