@@ -29,6 +29,7 @@ def test():
     assert recursive_bubble_sort([1, 2, 3]) == [1, 2, 3]
     print("bubble sort tests passed")
 
+
 if __name__ == "__main__":
 
     test()
