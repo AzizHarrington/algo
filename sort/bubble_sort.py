@@ -2,7 +2,7 @@ import random
 
 
 def _random_list(n):
-    random_list = range(n)
+    random_list = list(range(n))
     random.shuffle(random_list)
     return random_list
 
