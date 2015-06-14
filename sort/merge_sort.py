@@ -1,5 +1,6 @@
 from insertion_sort import insertion_sort
 
+
 def merge_sort(a_list):
     length = len(a_list)
     if length <= 1:
@@ -17,7 +18,18 @@ def test():
     assert merge_sort([1, 2, 3]) == [1, 2, 3]
     print("merge sort tests passed")
 
+def test_runtime(size):
+    import random
+    l = list(range(size))
+    random.shuffle(l)
+    import time
+    start = time.time()
+    merge_sort(l)
+    end = time.time() - start
+    print("List of {} elements took {} seconds to sort".format(size, end))
+
 
 if __name__ == "__main__":
 
-    test()
+    test_runtime(10000)
+

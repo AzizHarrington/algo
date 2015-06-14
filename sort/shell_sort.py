@@ -24,6 +24,17 @@ def test():
     print("shell sort tests passed")
 
 
+def test_runtime(size):
+    import random
+    l = list(range(size))
+    random.shuffle(l)
+    import time
+    start = time.time()
+    shell_sort(l)
+    end = time.time() - start
+    print("List of {} elements took {} seconds to sort".format(size, end))
+
+
 if __name__ == "__main__":
 
-    test()
+    test_runtime(10000)
