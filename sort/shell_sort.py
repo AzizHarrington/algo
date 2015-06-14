@@ -1,5 +1,12 @@
+from insertion_sort import insertion_sort
+
 def shell_sort(a_list):
     gaps = get_gaps(len(a_list))
+    for gap in gaps:
+        for start_pos in range(gap):
+            sublist = a_list[start_pos::gap]
+            sorted_sublist = insertion_sort(sublist)
+            a_list[start_pos::gap] = sorted_sublist
     return a_list
 
 
@@ -21,5 +28,4 @@ def test():
 
 if __name__ == "__main__":
 
-    # test()
-    print(get_gaps(111))
+    test()
