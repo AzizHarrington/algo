@@ -1,8 +1,8 @@
 from insertion_sort import insertion_sort
 
+
 def shell_sort(a_list):
-    gaps = get_gaps(len(a_list))
-    for gap in gaps:
+    for gap in get_gaps(len(a_list)):
         for start_pos in range(gap):
             a_list[start_pos::gap] = insertion_sort(a_list[start_pos::gap])
     return a_list
