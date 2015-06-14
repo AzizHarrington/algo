@@ -4,9 +4,7 @@ def shell_sort(a_list):
     gaps = get_gaps(len(a_list))
     for gap in gaps:
         for start_pos in range(gap):
-            sublist = a_list[start_pos::gap]
-            sorted_sublist = insertion_sort(sublist)
-            a_list[start_pos::gap] = sorted_sublist
+            a_list[start_pos::gap] = insertion_sort(a_list[start_pos::gap])
     return a_list
 
 
