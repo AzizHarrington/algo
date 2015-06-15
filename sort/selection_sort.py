@@ -2,6 +2,8 @@ import random
 import sys
 from collections import namedtuple
 
+from helpers import test_runtime
+
 
 sys.setrecursionlimit(10000)
 
@@ -29,9 +31,10 @@ def test():
     assert recursive_selection_sort(random_list) == [0, 1, 2, 3, 4]
     assert recursive_selection_sort([]) == []
     assert recursive_selection_sort([1, 2, 3]) == [1, 2, 3]
+    assert test_runtime(10000, recursive_selection_sort) < 1.0  # seconds
     print("selection sort tests passed")
 
 
 if __name__ == "__main__":
 
-    test_runtime(10000)
+    test()
