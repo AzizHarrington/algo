@@ -1,28 +1,24 @@
-import random
+from helpers import test_runtime
 
 
-def recursive_bubble_sort(a_list, is_sorted=False):
-    if is_sorted:
-        return a_list
-
-    is_sorted = True
-    for pos, item in enumerate(a_list):
-        if pos + 1 == len(a_list):
-            break
-        other = a_list[pos+1]
-        if item > other:
-            is_sorted = False
-            a_list[pos], a_list[pos+1] = other, item
-
-    return recursive_bubble_sort(a_list, is_sorted)
+def bubble_sort(a_list):
+    number_of_passes = len(a_list) - 1
+    is_sorted = False
+    while number_of_passes > 0 and not is_sorted:
+        is_sorted = True
+        for pos in range(number_of_passes):
+            if a_list[pos] > a_list[pos+1]:
+                is_sorted = False
+                a_list[pos], a_list[pos+1] = a_list[pos+1], a_list[pos]
+        number_of_passes -= 1
+    return a_list
 
 
 def test():
-    random_list = list(range(5))
-    random.shuffle(random_list)
-    assert recursive_bubble_sort(random_list) == [0, 1, 2, 3, 4]
-    assert recursive_bubble_sort([]) == []
-    assert recursive_bubble_sort([1, 2, 3]) == [1, 2, 3]
+    assert bubble_sort([1, 3, 0, 4, 2]) == [0, 1, 2, 3, 4]
+    assert bubble_sort([]) == []
+    assert bubble_sort([1, 2, 3]) == [1, 2, 3]
+    assert test_runtime(1000, bubble_sort) < 1.0  # seconds
     print("bubble sort tests passed")
 
 
