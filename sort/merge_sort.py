@@ -1,4 +1,4 @@
-from helpers import test_runtime
+from .helpers import test_runtime
 
 
 def merge_sort(a_list):

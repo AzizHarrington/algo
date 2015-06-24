@@ -1,7 +1,7 @@
 import sys
 from collections import namedtuple
 
-from helpers import test_runtime
+from .helpers import test_runtime
 
 
 sys.setrecursionlimit(10000)

@@ -1,5 +1,5 @@
-from insertion_sort import insertion_sort
-from helpers import test_runtime
+from .insertion_sort import insertion_sort
+from .helpers import test_runtime
 
 
 def shell_sort(a_list):
@@ -22,7 +22,7 @@ def test():
     assert shell_sort([]) == []
     assert shell_sort([2, 4, 2, 4]) == [2, 2, 4, 4]
     assert shell_sort([1, 2, 3]) == [1, 2, 3]
-    assert test_runtime(10000, shell_sort) < 1.0  # seconds
+    assert test_runtime(1000, shell_sort) < 1.0  # seconds
     print("shell sort tests passed")
 
 
