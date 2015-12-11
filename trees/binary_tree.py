@@ -4,6 +4,11 @@ class BinaryTree:
         self.left_child = None
         self.right_child = None
 
+    def __repr__(self):
+        left = self.left_child.__repr__() if self.left_child is not None else ''
+        right = self.right_child.__repr__() if self.right_child is not None else ''
+        return self.key + left + right
+
     def insert_left(self, new_node):
         if self.left_child is None:
             self.left_child = BinaryTree(new_node)
@@ -32,6 +37,13 @@ class BinaryTree:
     def get_root_val(self):
         return self.key
 
+tree = BinaryTree('a')
+tree.insert_left('b')
+tree.get_left_child().insert_left('d')
+tree.get_left_child().insert_right('e')
+tree.insert_right('c')
+print(tree)
+
 
 def test():
     tree = BinaryTree('a')
@@ -50,6 +62,9 @@ def test():
     assert tree.get_left_child().get_left_child().get_root_val() == 'b'
 
     print('tests passed')
+
+def test_print():
+    pass
 
 
 if __name__ == '__main__':
